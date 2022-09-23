@@ -1,6 +1,4 @@
-//Importation du package http natif de Node
 const http = require('http');
-//Importation de l'application
 const app = require('./app');
 
 const normalizePort = val => {
@@ -14,8 +12,6 @@ const normalizePort = val => {
     }
     return false;
 };
-
-//Demarrage du serveur 
 const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
@@ -48,7 +44,4 @@ server.on('listening', () => {
     console.log('Listening on ' + bind);
 });
 
-
-
-//Le serveur écoute la variable d'environnement du port ou le port 3000
-server.listen(process.env.PORT || 3000);
+server.listen(port);
