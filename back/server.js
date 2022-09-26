@@ -45,3 +45,5 @@ server.on('listening', () => {
 });
 
 server.listen(port);
+
+console.log("Serveur start/restart")

@@ -2,7 +2,17 @@
 const express = require('express');
 //Application express
 const app = express();
+// Importation de Mongoose
+const mongoose = require('mongoose');
 
+//Connection à Mongoose
+mongoose.connect('mongodb+srv://Mathis:08pj2z380Rc6kKT5@atlascluster.1hkdzyx.mongodb.net/?retryWrites=true&w=majority',
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    })
+    .then(() => console.log('Connexion à MongoDB réussie !'))
+    .catch(() => console.log('Connexion à MongoDB échouée !'));
 
 //Middleware
 app.use(express.json());
@@ -14,6 +24,7 @@ app.use((req, res, next) => {
     next();
 });
 
+//Vendre un objet
 app.post('/api/stuff', (req, res, next) => {
     console.log(req.body);
     res.status(201).json({
@@ -22,7 +33,8 @@ app.post('/api/stuff', (req, res, next) => {
 }
 )
 
-app.use('/api/stuff', (req, res, next) => {
+//Objet existent
+app.get('/api/stuff', (req, res, next) => {
     const stuff = [
         {
             _id: 'oeihfzeoi',
