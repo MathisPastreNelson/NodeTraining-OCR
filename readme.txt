@@ -1,8 +1,9 @@
 Pour lancer le serveur :
 cd back
-npm run start
 nodemon server 
 
+cd front
+npm run start
 
 Admin log :
 Mathis
