@@ -36,13 +36,6 @@ app.post('/api/stuff', (req, res, next) => {
         .catch(error => res.status(400).json({ error }));
 });
 
-// Récupérer un seul objet
-app.get("/api/stuff/:id", (req, res, next) => {
-    Thing.findOne({ _id: req.params.id })
-        .then(thing => res.status(200).json(thing))
-        .catch(error => res.status(404).json({ error }));
-});
-
 // Récupérer les objets existent
 app.get('/api/stuff', (req, res, next) => {
     Thing.find()
@@ -50,7 +43,27 @@ app.get('/api/stuff', (req, res, next) => {
         .catch(error => res.status(400).json({ error }));
 });
 
-app
+// Récupérer un seul objet
+app.get("/api/stuff/:id", (req, res, next) => {
+    Thing.findOne({ _id: req.params.id })
+        .then(thing => res.status(200).json(thing))
+        .catch(error => res.status(404).json({ error }));
+});
+
+// Modification d'un seul objet
+app.put('/api/stuff/:id', (req, res, next) => {
+    Thing.updateOne({ _id: req.params.id }, { ...req.body, _id: req.params.id })
+        .then(() => res.status(200).json({ message: "Objet modifié !" }))
+        .catch(error => res.status(400).json({ error }))
+
+})
+// Suppression d'un seul objet
+app.delete('/api/stuff/:id', (req, res, next) => {
+    Thing.deleteOne({ _id: req.params.id })
+        .then(() => res.status(200).json({ message: "Objet supprimé !" }))
+        .catch(error => res.status(400).json({ error }))
+
+})
 
 // Export vers d'autres fichiers rendu possible de l'application
 module.exports = app;
